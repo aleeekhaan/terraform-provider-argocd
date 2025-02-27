@@ -127,6 +127,34 @@ func expandApplicationSourcePlugin(in []interface{}) *application.ApplicationSou
 		}
 	}
 
+	if parameter, ok := a["parameter"]; ok {
+		for _, v := range parameter.(*schema.Set).List() {
+			param := v.(map[string]interface{})
+			pluginParam := application.ApplicationSourcePluginParameter{
+				Name: param["name"].(string),
+			}
+
+			if str, ok := param["string"]; ok {
+				s := str.(string)
+				pluginParam.String_ = &s
+			}
+
+			if arr, ok := param["array"]; ok {
+				if optionalArray, ok := arr.(application.OptionalArray); ok {
+					pluginParam.OptionalArray = &optionalArray
+				}
+			}
+
+			if mapParam, ok := param["map"]; ok {
+				if optionalMap, ok := mapParam.(application.OptionalMap); ok {
+					pluginParam.OptionalMap = &optionalMap
+				}
+			}
+
+			result.Parameters = append(result.Parameters, pluginParam)
+		}
+	}
+
 	return result
 }
 
@@ -763,9 +791,20 @@ func flattenApplicationSourcePlugin(as []*application.ApplicationSourcePlugin) (
 				})
 			}
 
+			var pluginParams []map[string]interface{}
+			for _, e := range a.Parameters {
+				pluginParams = append(pluginParams, map[string]interface{}{
+					"name":   e.Name,
+					"string": *e.String_,
+					"array":  *e.OptionalArray,
+					"map":    *e.OptionalMap,
+				})
+			}
+
 			result = append(result, map[string]interface{}{
-				"name": a.Name,
-				"env":  env,
+				"name":       a.Name,
+				"env":        env,
+				"parameters": pluginParams,
 			})
 		}
 	}

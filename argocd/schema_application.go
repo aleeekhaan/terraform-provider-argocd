@@ -261,6 +261,30 @@ func applicationSpecSchemaV0() *schema.Schema {
 												},
 											},
 										},
+										"parameters": {
+											Type:     schema.TypeSet,
+											Optional: true,
+											Elem: &schema.Resource{
+												Schema: map[string]*schema.Schema{
+													"name": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"string": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"array": {
+														Type:     schema.TypeList,
+														Optional: true,
+													},
+													"map": {
+														Type:     schema.TypeMap,
+														Optional: true,
+													},
+												},
+											},
+										},
 									},
 								},
 							},
@@ -667,6 +691,30 @@ func applicationSpecSchemaV1() *schema.Schema {
 													},
 													"value": {
 														Type:     schema.TypeString,
+														Optional: true,
+													},
+												},
+											},
+										},
+										"parameters": {
+											Type:     schema.TypeSet,
+											Optional: true,
+											Elem: &schema.Resource{
+												Schema: map[string]*schema.Schema{
+													"name": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"string": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"array": {
+														Type:     schema.TypeList,
+														Optional: true,
+													},
+													"map": {
+														Type:     schema.TypeMap,
 														Optional: true,
 													},
 												},
@@ -1082,6 +1130,30 @@ func applicationSpecSchemaV2() *schema.Schema {
 														Type:        schema.TypeString,
 														Description: "Value of the environment variable.",
 														Optional:    true,
+													},
+												},
+											},
+										},
+										"parameters": {
+											Type:     schema.TypeSet,
+											Optional: true,
+											Elem: &schema.Resource{
+												Schema: map[string]*schema.Schema{
+													"name": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"string": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"array": {
+														Type:     schema.TypeList,
+														Optional: true,
+													},
+													"map": {
+														Type:     schema.TypeMap,
+														Optional: true,
 													},
 												},
 											},
@@ -1653,6 +1725,30 @@ func applicationSpecSchemaV4(allOptional bool) *schema.Schema {
 														Type:        schema.TypeString,
 														Description: "Value of the environment variable.",
 														Optional:    true,
+													},
+												},
+											},
+										},
+										"parameters": {
+											Type:     schema.TypeSet,
+											Optional: true,
+											Elem: &schema.Resource{
+												Schema: map[string]*schema.Schema{
+													"name": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"string": {
+														Type:     schema.TypeString,
+														Optional: true,
+													},
+													"array": {
+														Type:     schema.TypeList,
+														Optional: true,
+													},
+													"map": {
+														Type:     schema.TypeMap,
+														Optional: true,
 													},
 												},
 											},
